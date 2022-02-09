@@ -28,10 +28,10 @@
         <div class="col-sm-10">
           <div class="row mb-3">
             <div class="col-sm-10">
-              <input type="descripcion" class="form-control" id="descripcion" formControlName="descripcion"
-                [ngClass]="{'is-valid' : f.descripcion.dirty && !(f.descripcion.errors?.required || f.descripcion.errors?.minlength) }">
+                <textarea class="form-control" id="descripcion" formControlName="descripcion"
+                [ngClass]="{'is-valid' : f.descripcion.dirty && !(f.descripcion.errors?.required || f.descripcion.errors?.minlength) }"></textarea>
               <div *ngIf="f.descripcion.dirty && f.descripcion.errors?.required" class="text-danger">
-                Se debe introducir un descripcion
+                Se debe introducir una descripcion
               </div>
               <div *ngIf="f.descripcion.dirty && f.descripcion.errors?.minlength" class="text-danger">
                 El descripcion introducido es demasiado corto

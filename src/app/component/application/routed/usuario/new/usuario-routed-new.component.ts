@@ -13,6 +13,8 @@ import { waitForAsync } from '@angular/core/testing';
 import { APIService } from 'src/app/service/api.service';
 import { IApi1, IApi2 } from 'src/app/model/API-interfaces';
 import { CryptoService } from 'src/app/service/crypto.service';
+import { EquipoService } from 'src/app/service/equipo.service';
+import { IEquipo } from 'src/app/model/equipo-interfaces';
 
 @Component({
   selector: 'app-usuario-routed-new',
@@ -32,6 +34,7 @@ export class UsuarioRoutedNewComponent implements OnInit {
   strOperation: string = "new"
   strTitleSingular: string = "Usuario";
   strTitlePlural: string = "Usuarios";
+  oUsuarioSession: IUsuario;
 
   get f() {
     return this.oForm.controls;
@@ -44,11 +47,15 @@ export class UsuarioRoutedNewComponent implements OnInit {
     private oActivatedRoute: ActivatedRoute,
     private oAPIService : APIService,
     private oCryptoService: CryptoService,
-
+    private oEquipoService:EquipoService,
     private oLocation: Location,
     public oIconService: IconService,
     private oTipousuarioService: TipousuarioService
+
   ) {
+
+    this.oUsuarioSession = JSON.parse(localStorage.getItem("user"));
+
     if (this.oActivatedRoute.snapshot.data.message) {
       const strUsuarioSession: string =
         this.oActivatedRoute.snapshot.data.message;
@@ -64,17 +71,12 @@ export class UsuarioRoutedNewComponent implements OnInit {
       login: ['', [Validators.required, Validators.minLength(5)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
       summonername: ['', [Validators.required, Validators.minLength(5)]],
-      // accountid: ['', [Validators.required, Validators.minLength(5)]],
-      // puuid: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required, Validators.minLength(5)]],
       tusuario: ['', [Validators.required, Validators.maxLength(1)]],
-      // summonerlevel: ['', [Validators.required, Validators.maxLength(4)]],
-      // profileiconid: ['', [Validators.required, Validators.maxLength(10)]],
-      // rank: ['', [Validators.required, Validators.maxLength(10)]],
-      // tier: ['', [Validators.required, Validators.maxLength(10)]],
-      twitter: ['', [ Validators.maxLength(10)]],
+      descripcion:['',[Validators.required, Validators.minLength(20)]],
+      twitter: ['', [ Validators.maxLength(20)]],
       discord: ['', [ Validators.maxLength(10)]],
-      equipo: ['', [Validators.required, Validators.maxLength(1)]],
+      equipo: ['', [Validators.required]],
 
 
     });
@@ -114,6 +116,7 @@ export class UsuarioRoutedNewComponent implements OnInit {
             losses:oData2[0].losses,
             discord:this.oForm.value.discord,
             twitter:this.oForm.value.twitter,
+            descripcion:this.oForm.value.descripcion,
             tipousuario:{
               id:this.oForm.value.tusuario
             },
@@ -150,6 +153,7 @@ export class UsuarioRoutedNewComponent implements OnInit {
   id_tipousuario: number = null;
   showingModal: boolean = false;
   dataToShow: ITipoUsuario = null;
+  dataToShow2: IEquipo=null;
 
   eventsSubjectShowModal: Subject<void> = new Subject<void>();
   eventsSubjectHideModal: Subject<void> = new Subject<void>();
@@ -189,6 +193,26 @@ export class UsuarioRoutedNewComponent implements OnInit {
       .subscribe((oData: ITipoUsuario) => {
         this.dataToShow = oData;
         console.log(this.dataToShow)
+        //this.oUsuario = oData;
+      });
+
+    return false;
+  }
+  onChangeEquipo($event: any) {
+
+    console.log("--->" + this.oForm.controls['equipo'].value);
+    this.oForm.controls['equipo'].markAsDirty();
+
+    //aqui cerrar la ventana emergente 
+    if (this.showingModal) {
+      this.closeModal();
+    }
+
+    //actualizar el usuario
+    this.oEquipoService
+      .view(this.oForm.controls['equipo'].value)
+      .subscribe((oData: IEquipo) => {
+        this.dataToShow2 = oData;
         //this.oUsuario = oData;
       });
 

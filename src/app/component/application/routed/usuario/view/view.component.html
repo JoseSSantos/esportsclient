@@ -4,6 +4,9 @@
 
 
     <app-usuario-unrouted-view [id]=id></app-usuario-unrouted-view>
+    <div class="equipo">
+        <app-equipo-unrouted-view [idequipo]=id></app-equipo-unrouted-view>
+      </div>
 
     <div class="row justify-content-center" *ngIf="oUsuarioSession.id==id || oUsuarioSession.tipousuario.id==1">
         <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center mt-5">

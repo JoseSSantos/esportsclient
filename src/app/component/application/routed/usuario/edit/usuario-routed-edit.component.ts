@@ -138,6 +138,7 @@ export class UsuarioRoutedEditComponent implements OnInit {
             losses:oData2[0].losses,
             discord:this.oForm.value.discord,
             twitter:this.oForm.value.twitter,
+            descripcion:this.oForm.value.descripcion,
             tipousuario:{
               id:this.oForm.value.tusuario
             },

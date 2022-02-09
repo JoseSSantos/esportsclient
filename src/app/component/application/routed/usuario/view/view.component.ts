@@ -11,6 +11,7 @@ import { IUsuario } from 'src/app/model/usuario-interfaces';
 export class usuarioroutedViewComponent implements OnInit {
 
   id: number;
+  idequipo:number;
   strUsuarioSession: string;
   strEntity: string = "usuario"
   strOperation: string = "view"
@@ -33,7 +34,7 @@ export class usuarioroutedViewComponent implements OnInit {
       oRouter.navigate(['/home']);
     }
 
-    this.id = this.oActivatedRoute.snapshot.params.id;    
+    this.id = this.oActivatedRoute.snapshot.params.id;   
   }
 
   ngOnInit(): void {

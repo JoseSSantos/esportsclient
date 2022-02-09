@@ -17,7 +17,8 @@ export interface IUsuario {
     tipousuario: ITipoUsuario,
     equipo: IEquipo,
     discord:string,
-    twitter:string
+    twitter:string,
+    descripcion:string
 }
 export interface IUsuarioPage{
     content: IUsuario[],
@@ -40,5 +41,7 @@ export interface IUsuario2Send{
     tipousuario: I2Send,
     equipo: I2Send,
     discord:string,
-    twitter:string
+    twitter:string,
+    descripcion:string
+
 }

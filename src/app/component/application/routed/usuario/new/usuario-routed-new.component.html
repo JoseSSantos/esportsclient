@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
-        
+
         <label for="email" class="col-sm-2 col-form-label">email</label>
         <div class="col-sm-10">
           <div class="row mb-3">
@@ -70,35 +70,46 @@
             </div>
           </div>
         </div>
-        <label for="tusuario" class="col-sm-2 col-form-label">Tipo Usuario</label>
 
-        <div class="col-sm-10">
-          <div class="row mb-3">
-                <label for="tusuario" class="col-sm-2 col-form-label"> <i
-                        [ngClass]="oIconService.getIcon('usuario')"></i> Tipo</label>
-
-                <div class="col-sm-5">
-                    <div class="input-group">
-                        <span class="input-group-text">{{dataToShow?.nombre}}</span>
-                        <input type="number" class="form-control" id="tusuario" formControlName="tusuario"
-                            (ngModelChange)="onChangeTUsuario($event)">
-                        <button type="button" class="btn btn-success" (click)="openModal()">Buscar tipo usuario</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <label for="equipo" class="col-sm-2 col-form-label">equipo</label>
+        <label for="descripcion" class="col-sm-2 col-form-label">descripcion</label>
         <div class="col-sm-10">
           <div class="row mb-3">
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="equipo" formControlName="equipo"
-                [ngClass]="{'is-valid' : f.equipo.dirty && !(f.equipo.errors?.required || f.equipo.errors?.minlength) }">
-              <div *ngIf="f.equipo.dirty && f.equipo.errors?.required" class="text-danger">
-                Se debe introducir un equipo
+              <textarea class="form-control" id="descripcion" formControlName="descripcion"
+                [ngClass]="{'is-valid' : f.descripcion.dirty && !(f.descripcion.errors?.required || f.descripcion.errors?.minlength) }"></textarea>
+              <div *ngIf="f.descripcion.dirty && f.descripcion.errors?.required" class="text-danger">
+                Se debe introducir una descripcion
               </div>
-              <div *ngIf="f.equipo.dirty && f.equipo.errors?.minlength" class="text-danger">
-                El equipo introducido es demasiado corto
+              <div *ngIf="f.descripcion.dirty && f.descripcion.errors?.minlength" class="text-danger">
+                El descripcion introducido es demasiado corto
+              </div>
+            </div>
+          </div>
+        </div>
+          <label for="tusuario" class="col-sm-2 col-form-label">Tipo Usuario</label>
+
+          <div class="col-sm-10" >
+            <div class="row mb-3">
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <span class="input-group-text">{{dataToShow?.nombre}}</span>
+                  <input type="number" class="form-control" id="tusuario" formControlName="tusuario"
+                    (ngModelChange)="onChangeTUsuario($event)">
+                  <button type="button" class="btn btn-success" (click)="openModal()">Buscar tipo usuario</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <label for="tusuario" class="col-sm-2 col-form-label">Equipo</label>
+
+        <div class="col-sm-10">
+          <div class="row mb-3">
+            <div class="col-sm-10">
+              <div class="input-group">
+                <span class="input-group-text">{{dataToShow2?.nombre}}</span>
+                <input type="number" class="form-control" id="equipo" formControlName="equipo"
+                  (ngModelChange)="onChangeEquipo($event)">
+                <button type="button" class="btn btn-success" (click)="openModal()">Buscar Equipo</button>
               </div>
             </div>
           </div>
@@ -162,10 +173,10 @@
 
 <app-footer></app-footer>
 <app-modal [show]="eventsSubjectShowModal.asObservable()" [size]="'xl'" [hide]="eventsSubjectHideModal.asObservable()"
-    (close)="onCloseModal()">
-    <app-tipousuario-unrouted-plist [mode]="false" (selection)="onSelection($event)">
-        <header></header>        
-    </app-tipousuario-unrouted-plist>
+  (close)="onCloseModal()">
+  <app-tipousuario-unrouted-plist [mode]="false" (selection)="onSelection($event)">
+    <header></header>
+  </app-tipousuario-unrouted-plist>
 </app-modal>
 
 <app-popup [show]="eventsSubjectShowPopup.asObservable()" [body]="strResult" (close)="onClosePopup()"></app-popup>

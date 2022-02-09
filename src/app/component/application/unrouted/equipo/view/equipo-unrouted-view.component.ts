@@ -12,7 +12,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 })
 export class EquipoUnroutedViewComponent implements OnInit {
   
-  @Input() id: number = null;  
+  @Input() idequipo: number = null;  
   
   oEquipo: IEquipo;
   oUsuarioSession: IUsuario;
@@ -33,12 +33,25 @@ export class EquipoUnroutedViewComponent implements OnInit {
   }
   ngOnInit(): void {
     this.oUsuarioSession = JSON.parse(localStorage.getItem("user"));
-    this.getOne();
+
+    if(this.oActivatedRoute.snapshot.routeConfig.path=="usuario/view/:id"){
+      console.log(this.oActivatedRoute.snapshot.routeConfig.path);
+      this.getUser();
+    }else{
+      this.getOne();
+    }
   }
 
+  getUser =() => {
+    this.oUsuarioService.getOne(this.idequipo).subscribe((oData1:IUsuario)=>{
+      this.oEquipoService.getOne(oData1.equipo.id).subscribe((oData:IEquipo)=>{
+        this.oEquipo=oData;
+      });
+    });
+  }
   getOne = () => {
     this.oEquipoService
-      .getOne(this.id)
+      .getOne(this.idequipo)
       .subscribe((oData: IEquipo) => {
         this.oEquipo = oData;
       });

@@ -39,6 +39,7 @@ import { EncuentroRoutedPlistComponent } from './component/application/routed/en
 import { EncuentroUnroutedPlistComponent } from './component/application/unrouted/encuentro/plist/encuentro-unrouted-plist.component';
 import { EncuentroRoutedEditComponent } from './component/application/routed/encuentro/edit/encuentro-routed-edit.component';
 import { EncuentroRoutedRemoveComponent } from './component/application/routed/encuentro/remove/encuentro-routed-remove.component';
+import { DiscordComponent } from './component/shared/unrouted/discord/discord.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { EncuentroRoutedRemoveComponent } from './component/application/routed/e
     EncuentroRoutedPlistComponent,
     EncuentroUnroutedPlistComponent,
     EncuentroRoutedEditComponent,
-    EncuentroRoutedRemoveComponent
+    EncuentroRoutedRemoveComponent,
+    DiscordComponent
     
   ],
   imports: [

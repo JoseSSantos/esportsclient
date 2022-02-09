@@ -60,7 +60,8 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
     if(this.oActivatedRoute.snapshot.params.id){
       this.teamfilter();
     }else{
-      this.getPage();}
+      this.getPage();
+    }
     
   }
 
@@ -108,7 +109,11 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
     })
   }
   jumpToPage = () => {
-    this.getPage();
+    if(this.oActivatedRoute.snapshot.params.id){
+      this.teamfilter();
+    }else{
+      this.getPage();
+    }    
     return false;
   }
 
