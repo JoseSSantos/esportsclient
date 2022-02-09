@@ -14,9 +14,9 @@ import { debounceTime, map } from 'rxjs/operators';
 })
 export class UsuarioUnroutedPlistComponent implements OnInit {
 
-  @Input() id: number = null;  
+  @Input() id: number = null;
   @Input() id_equipo: number = null;
-  @Input() id_tipousuario: number =null;
+  @Input() id_tipousuario: number = null;
   @Input() mode: boolean = true; //true=edición; false=selección
   @Output() selection = new EventEmitter<number>();
   //@ContentChild(TemplateRef) toolTemplate: TemplateRef<any>;
@@ -51,23 +51,23 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
     private oActivatedRoute: ActivatedRoute,
   ) {
     this.oUsuarioSession = JSON.parse(localStorage.getItem("user"));
-   }
+  }
 
   ngOnInit(): void {
     this.subjectFiltro$.pipe(
     ).subscribe(() => this.getPage());
     this.page = 1;
-    if(this.oActivatedRoute.snapshot.params.id){
+    if (this.oActivatedRoute.snapshot.params.id) {
       this.teamfilter();
-    }else{
+    } else {
       this.getPage();
     }
-    
+
   }
 
   getPage = () => {
     if (this.id_equipo) {
-      this.oPostService.getPageFiltered(this.pageSize, this.page, this.currentSortField, this.currentSortDirection,  this.id_equipo , this.strFilter).subscribe((oPage: IUsuarioPage) => {
+      this.oPostService.getPageFiltered(this.pageSize, this.page, this.currentSortField, this.currentSortDirection, this.id_equipo, this.strFilter).subscribe((oPage: IUsuarioPage) => {
         if (this.strFilter) {
           this.strFilteredMessage = "Listado filtrado por el tipo de usuario " + this.id_equipo + " y por " + this.strFilter;
         } else {
@@ -94,8 +94,8 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
     }
   }
 
-  teamfilter =() =>{
-    this.oPostService.getPageFiltered(this.pageSize, this.page, this.currentSortField, this.currentSortDirection,this.id, this.strFilter).subscribe((oPage: IUsuarioPage) => {
+  teamfilter = () => {
+    this.oPostService.getPageFiltered(this.pageSize, this.page, this.currentSortField, this.currentSortDirection, this.id, this.strFilter).subscribe((oPage: IUsuarioPage) => {
       if (this.strFilter) {
         this.strFilteredMessage = "Listado filtrado por " + this.strFilter;
       } else {
@@ -109,11 +109,11 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
     })
   }
   jumpToPage = () => {
-    if(this.oActivatedRoute.snapshot.params.id){
+    if (this.oActivatedRoute.snapshot.params.id) {
       this.teamfilter();
-    }else{
+    } else {
       this.getPage();
-    }    
+    }
     return false;
   }
 
@@ -121,13 +121,30 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
     this.subjectFiltro$.next(void 0);
   }
 
-  doFilter() {
-    this.getPage();
+  doFilter = () => {
+
+    if (this.oActivatedRoute.snapshot.params.id) {
+      this.teamfilter();
+      console.log("filtrado");
+
+    } else {
+      console.log("sin filtrado");
+
+      this.getPage();
+    }
+
   }
 
-  doResetFilter() {
+  doResetFilter = () => {
     this.strFilter = null;
-    this.getPage();
+    if (this.oActivatedRoute.snapshot.params.id) {
+      console.log("filtrado");
+      this.teamfilter();
+    } else { 
+      console.log("Sin filtrar");
+
+      this.getPage(); 
+    }
   }
 
   doResetOrder() {
@@ -137,6 +154,19 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
   }
 
   doSetOrder(order: string) {
+    if (this.oActivatedRoute.snapshot.params.id) {
+
+      this.currentSortField = order;
+      if (this.currentSortDirection == 'asc') {
+        this.currentSortDirection = 'desc';
+      } else if (this.currentSortDirection == 'desc') {
+        this.currentSortDirection = '';
+      } else {
+        this.currentSortDirection = 'asc';
+      }
+      this.teamfilter();
+    
+    }else{
     this.currentSortField = order;
     if (this.currentSortDirection == 'asc') {
       this.currentSortDirection = 'desc';
@@ -146,7 +176,7 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
       this.currentSortDirection = 'asc';
     }
     this.getPage();
-  }
+  }}
 
   onSelection(id: number) {
     console.log("selection plist emite " + id);
