@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+  <table class="table table-striped">
+    <tbody>
+      <tr *ngIf="oUsuarioSession?.tipousuario?.id==1">
+        <th> ID</th>
+        <td>{{oUsuario?.id}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="perfil">
+    <div class="principal">
+      <div class="imagenperfil">
+        <img src="https://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/{{oUsuario?.profileiconid}}.png">
+      </div>
+      <div class="datos">
+        <div class="login">
+          <p>@{{oUsuario?.login}}</p>
+        </div>
+        <div class="summonername">
+          <p>{{oUsuario?.summonername}}</p>
+        </div>
+        <div class="Rango">
+          <p>{{oUsuario?.tier}} {{oUsuario?.rank}}</p>
+        </div>
+        <div class="Nivel">
+          <p>Lvl: {{oUsuario?.summonerlevel}}</p>
+        </div>
+        <div class="Media">
+          <p>
+          Victorias: {{oUsuario?.wins}}
+          Derrotas: {{oUsuario?.losses}}
+          WinRate: {{winRate | number:'.1-2'}}%
+        </p>
+        </div>
+        <div class="redes">
+          <p>
+          Discord: Prueba<br>
+          Twitter: Prueba
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="descripcion">
+  <p>qwerqwerqwerqweruiwehqhuef qweuiqefuwiqwefhu fqwefu qhwefhqweifhqweiufh qweifhqweuifh qweuifhqweuifh qweuifh weuifh qweiufhqo eiuhf qwehf uiqwefouiqh eiufh</p>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="row justify-content-center">
+    <table class="table table-striped">
+      <tbody>
+        <tr *ngIf="oUsuarioSession?.tipousuario?.id==1">
+          <th>ID</th>
+          <td>{{oPartido?.id}}</td>
+        </tr>
+        <tr>
+        <tr>
+          <td>Nombre</td>
+          <td>{{oPartido?.equipo1.nombre}}</td>
+        </tr>
+        <tr>
+          <td>Descripcion</td>
+          <td>{{oPartido?.equipo2.nombre}}</td>
+        </tr>
+        <tr>
+          <td>Siglas</td>
+          <td>{{oPartido?.fecha}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
