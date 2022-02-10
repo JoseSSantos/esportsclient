@@ -40,6 +40,9 @@ import { EncuentroUnroutedPlistComponent } from './component/application/unroute
 import { EncuentroRoutedEditComponent } from './component/application/routed/encuentro/edit/encuentro-routed-edit.component';
 import { EncuentroRoutedRemoveComponent } from './component/application/routed/encuentro/remove/encuentro-routed-remove.component';
 import { DiscordComponent } from './component/shared/unrouted/discord/discord.component';
+import { InfiniteRoutedListComponent } from './component/application/routed/encuentro/infinite-routed-list/infinite-routed-list.component';
+//import { UsuarioCplistUnroutedComponent } from './component/application/unrouted/usuario/cplist/usuario-cplist-unrouted.component';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -77,7 +80,9 @@ import { DiscordComponent } from './component/shared/unrouted/discord/discord.co
     EncuentroUnroutedPlistComponent,
     EncuentroRoutedEditComponent,
     EncuentroRoutedRemoveComponent,
-    DiscordComponent
+    DiscordComponent,
+    InfiniteRoutedListComponent,
+    //UsuarioCplistUnroutedComponent
     
   ],
   imports: [
@@ -85,7 +90,8 @@ import { DiscordComponent } from './component/shared/unrouted/discord/discord.co
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    InfiniteScrollModule
   ],
   providers: [
     SessionService,

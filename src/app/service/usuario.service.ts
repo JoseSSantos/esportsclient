@@ -43,6 +43,21 @@ export class UsuarioService {
     page--;
     return this.http.get<IUsuarioPage>(this.sURL + "/page" + "?size=" + rpp + "&page=" + page + strOrderUrl + filterStr + "&equipo=" + equipo, httpOptions);
   }
+  getPageWOEquipo(rpp: number, page: number, order: string, direction: string, equipo: number, filtertype: string):Observable<IUsuarioPage>{
+
+    let strOrderUrl: string = "";
+    let filterStr: string = "";
+    console.log("getpagef")
+    if (order) {
+      strOrderUrl += "&sort=" + order + "," + direction;
+    }
+    if (filtertype) {
+      filterStr += "&filtertype=" + filtertype;
+    }
+    page--;
+    return this.http.get<IUsuarioPage>(this.sURL + "/page" + "?size=" + rpp + "&page=" + page + strOrderUrl + filterStr, httpOptions);
+  
+  }
 
 
   getOne(id: number): Observable<IUsuario> {

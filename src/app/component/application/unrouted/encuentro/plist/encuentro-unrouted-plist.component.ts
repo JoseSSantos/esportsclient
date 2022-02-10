@@ -123,7 +123,11 @@ export class EncuentroUnroutedPlistComponent implements OnInit {
     this.getPage();
   }
 
-  onSelection(id: number) {
+  onSelection1(id: number) {
+    console.log("selection plist emite " + id);
+    this.selection.emit(id);
+  }
+  onSelection2(id: number) {
     console.log("selection plist emite " + id);
     this.selection.emit(id);
   }

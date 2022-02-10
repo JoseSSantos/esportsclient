@@ -10,34 +10,43 @@
 
       <div class="row mb-3">
         <label for="Equipo1" class="col-sm-2 col-form-label">Primer Equipo</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10" *ngIf="oUsuarioSession?.tipousuario?.id==1">
+            <div class="row mb-3">
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <span class="input-group-text">{{dataToShow2?.nombre}}</span>
+                  <input type="number" class="form-control" id="Equipo1" formControlName="Equipo1"
+                    (ngModelChange)="onChangeEquipo1($event)" readonly>
+                  <button type="button" class="btn btn-success" (click)="openModal()">Buscar Equipo</button>
+                </div>
+              </div>
+            </div>
+          
+        </div>
+
+        <div class="col-sm-10" *ngIf="oUsuarioSession?.tipousuario.id==2">
           <div class="row mb-3">
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="Equipo1" formControlName="Equipo1"
-                [ngClass]="{'is-valid' : f.Equipo1.dirty && !(f.Equipo1.errors?.required || f.Equipo1.errors?.minlength) }">
-              <div *ngIf="f.Equipo1.dirty && f.Equipo1.errors?.required" class="text-danger">
-                Se debe introducir un Equipo1
-              </div>
-              <div *ngIf="f.Equipo1.dirty && f.Equipo1.errors?.minlength" class="text-danger">
-                El Equipo1 introducido es demasiado corto
-              </div>
+            <div class="col-sm-10" id="placeholder">
+              <input type="text" value="{{oUsuarioSession.equipo.nombre}}" readonly>
             </div>
           </div>
         </div>
-        <label for="Equipo2" class="col-sm-2 col-form-label">Segundo equipo</label>
-        <div class="col-sm-10">
-          <div class="row mb-3">
-            <div class="col-sm-10">
-              <input type="Equipo2" class="form-control" id="Equipo2" formControlName="Equipo2"
-                [ngClass]="{'is-valid' : f.Equipo2.dirty && !(f.Equipo2.errors?.required || f.Equipo2.errors?.minlength) }">
-              <div *ngIf="f.Equipo2.dirty && f.Equipo2.errors?.required" class="text-danger">
-                Se debe introducir un Equipo2
-              </div>
-              <div *ngIf="f.Equipo2.dirty && f.Equipo2.errors?.minlength" class="text-danger">
-                El Equipo2 introducido es demasiado corto
+
+
+
+        <label for="Equipo2" *ngIf="oUsuarioSession?.tipousuario?.id==1" class="col-sm-2 col-form-label">Segundo Equipo</label>
+        <div class="col-sm-10" *ngIf="oUsuarioSession?.tipousuario?.id==1">
+            <div class="row mb-3">
+              <div class="col-sm-10">
+                <div class="input-group">
+                  <span class="input-group-text">{{dataToShow2?.nombre}}</span>
+                  <input type="number" class="form-control" id="Equipo2" formControlName="Equipo2"
+                    (ngModelChange)="onChangeEquipo2($event)" readonly>
+                  <button type="button" class="btn btn-success" (click)="openModal()">Buscar Equipo</button>
+                </div>
               </div>
             </div>
-          </div>
+          
         </div>
         
 
@@ -77,5 +86,15 @@
 
 <app-footer></app-footer>
 
+<app-infinite-routed-list></app-infinite-routed-list>
+<app-modal [show]="eventsSubjectShowModal.asObservable()" [size]="'xl'" [hide]="eventsSubjectHideModal.asObservable()"
+  (close)="onCloseModal()">
+  <app-equipo-unrouted-plist [mode]="false" (selection)="onSelection1($event)">
+    <header></header>
+  </app-equipo-unrouted-plist>
+
+  <app-equipo-unrouted-plist [mode]="false" (selection)="onSelection2($event)">
+  </app-equipo-unrouted-plist>
+</app-modal>
 
 <app-popup [show]="eventsSubjectShowPopup.asObservable()" [body]="strResult" (close)="onClosePopup()"></app-popup>

@@ -117,9 +117,11 @@ export class EncuentroRoutedEditComponent implements OnInit {
 
   update = (): void => {
     console.log(this.oPartido);
+    console.log("hola")
     this.oPartidoService
       .updateOne(this.oPartido)
       .subscribe((id: number) => {
+        console.log("editado")
         if (id) {
           this.strResult = 'El Equipo se ha modificado correctamente';
         } else {

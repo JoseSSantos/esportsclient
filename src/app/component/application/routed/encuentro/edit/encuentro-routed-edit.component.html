@@ -28,7 +28,12 @@
           <div class="col-sm-10">
             <div class="row mb-3">
               <div class="col-sm-10">
-                <input type="equipo2" value="{{oPartido?.equipo2.id}}"class="form-control" id="equipo2" formControlName="equipo2"
+
+                <input *ngIf="oPartido?.equipo2==null" type="equipo2" class="form-control" id="equipo2" formControlName="equipo2"
+                  [ngClass]="{'is-valid' : f.equipo2.dirty && !(f.equipo2.errors?.required || f.equipo2.errors?.minlength) }">
+
+                  
+                <input *ngIf="oPartido?.equipo2!=null" type="equipo2" value="{{oPartido?.equipo2.id}}"class="form-control" id="equipo2" formControlName="equipo2"
                   [ngClass]="{'is-valid' : f.equipo2.dirty && !(f.equipo2.errors?.required || f.equipo2.errors?.minlength) }">
                 <div *ngIf="f.equipo2.dirty && f.equipo2.errors?.required" class="text-danger">
                   Se debe introducir un equipo2
@@ -36,6 +41,8 @@
                 <div *ngIf="f.equipo2.dirty && f.equipo2.errors?.minlength" class="text-danger">
                   El equipo2 introducido es demasiado corto
                 </div>
+
+
               </div>
             </div>
           </div>

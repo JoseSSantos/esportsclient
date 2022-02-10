@@ -5,9 +5,11 @@ import { Location } from '@angular/common';
 import { Subject } from 'rxjs';
 import { IUsuario } from 'src/app/model/usuario-interfaces';
 import { IconService } from 'src/app/service/icon.service';
-import { IPartido, IPartido2Send } from 'src/app/model/partido-interfaces';
+import { IPartido, IPartido2Send, IPartidoNew } from 'src/app/model/partido-interfaces';
 import { PartidoService } from 'src/app/service/partido.service';
 import { DateTimeService } from 'src/app/service/datetime.service';
+import { IEquipo } from 'src/app/model/equipo-interfaces';
+import { EquipoService } from 'src/app/service/equipo.service';
 
 declare let $: any;
 
@@ -22,11 +24,13 @@ export class EncuentroRoutedNewComponent implements OnInit {
   strOperation: string = 'new';
   strTitleSingular: string = 'partido';
   strTitlePlural: string = 'equipos';
-  oPartido: IPartido2Send=null;
+  oPartidoOrg: IPartidoNew=null;
+  oPartidoAdm: IPartido2Send=null;
   id: number = null;
   oForm: FormGroup = null;
   strResult: string = null;
-  oUserSession: IUsuario;
+  oUsuarioSession: IUsuario;
+  dataToShow2:IEquipo;
 
   get f() {
     return this.oForm.controls;
@@ -40,8 +44,12 @@ export class EncuentroRoutedNewComponent implements OnInit {
     public oIconService: IconService,
     private oLocation: Location,
     private oPartidoService:PartidoService,
+    private oEquipoService:EquipoService,
+
     
   ) {
+    this.oUsuarioSession = JSON.parse(localStorage.getItem("user"));
+
     if (this.oActivatedRoute.snapshot.data.message) {
       const strUsuarioSession: string =
         this.oActivatedRoute.snapshot.data.message;
@@ -53,12 +61,17 @@ export class EncuentroRoutedNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.oUsuarioSession.tipousuario.id==2){
     this.oForm = this.oFormBuilder.group({
-      Equipo1: ['', [Validators.required]],
-      Equipo2: ['', [Validators.required]],
       fecha: ["", [Validators.required]],
       
-    });
+    });}else if(this.oUsuarioSession.tipousuario.id==1){
+      this.oForm = this.oFormBuilder.group({
+        Equipo1:["", [Validators.required]],
+        Equipo2:["", [Validators.required]],
+        fecha: ["", [Validators.required]]
+      });
+    }
     $('#fecha').datetimepicker({
       defaultDate: "+1w",
       numberOfMonths: 1,
@@ -74,9 +87,18 @@ export class EncuentroRoutedNewComponent implements OnInit {
 
 
   onSubmit(): void {
-    
+    if (this.oUsuarioSession.tipousuario.id==2 && this.oForm){
+      this.oPartidoOrg = {
+        id:null,
+        equipo1:{
+          id:this.oUsuarioSession.equipo.id
+        },
+        fecha:this.oForm.value.fecha
+      };
+      this.newO();
+    }
       if (this.oForm) {
-        this.oPartido = {
+        this.oPartidoAdm = {
           id:null,
           equipo1:{
             id:this.oForm.value.Equipo1
@@ -86,14 +108,27 @@ export class EncuentroRoutedNewComponent implements OnInit {
           },
           fecha:this.oForm.value.fecha
         };
-        this.new();
+        this.newA();
       }
     
   }
 
-  new = (): void => {
+  newA = (): void => {
     this.oPartidoService
-      .newOne(this.oPartido)
+      .newOne(this.oPartidoAdm)
+      .subscribe((id:number) => {
+        if (id) {
+          console.log(id)
+          this.strResult = 'El partido se ha creado correctamente';
+        } else {
+          this.strResult = 'Error en la creacion del partido';
+        }
+        this.openPopup();
+      });
+  };
+  newO = (): void => {
+    this.oPartidoService
+      .newOneA(this.oPartidoOrg)
       .subscribe((id:number) => {
         if (id) {
           console.log(id)
@@ -132,8 +167,55 @@ export class EncuentroRoutedNewComponent implements OnInit {
     this.showingModal = false;
   }
 
+//ver equipos
+onChangeEquipo1($event: any) {
 
+  console.log("--->" + this.oForm.controls['Equipo1'].value);
+  this.oForm.controls['Equipo1'].markAsDirty();
 
+  //aqui cerrar la ventana emergente 
+  if (this.showingModal) {
+    this.closeModal();
+  }
+
+  //actualizar el usuario
+  this.oEquipoService
+    .view(this.oForm.controls['Equipo1'].value)
+    .subscribe((oData: IEquipo) => {
+      this.dataToShow2 = oData;
+      //this.oUsuario = oData;
+    });
+
+  return false;
+}
+onChangeEquipo2($event: any) {
+
+  console.log("--->" + this.oForm.controls['Equipo2'].value);
+  this.oForm.controls['Equipo2'].markAsDirty();
+
+  //aqui cerrar la ventana emergente 
+  if (this.showingModal) {
+    this.closeModal();
+  }
+
+  //actualizar el usuario
+  this.oEquipoService
+    .view(this.oForm.controls['Equipo2'].value)
+    .subscribe((oData: IEquipo) => {
+      this.dataToShow2 = oData;
+      //this.oUsuario = oData;
+    });
+
+  return false;
+}
+onSelection1($event: any) {
+  console.log("edit evento recibido: " + $event)
+  this.oForm.controls['Equipo1'].setValue($event);
+}
+onSelection2($event: any) {
+  console.log("edit evento recibido: " + $event)
+  this.oForm.controls['Equipo2'].setValue($event);
+}
   //popup
 
   eventsSubjectShowPopup: Subject<void> = new Subject<void>();

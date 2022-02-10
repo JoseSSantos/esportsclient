@@ -56,7 +56,7 @@
   <div class="row justify-content-center">
     <div class="col-md table-responsive-md">
   
-      <table class="table table-bordered table-striped table-hover">
+      <table id="usuarios" class="table table-bordered table-striped table-hover">
         <thead>
           <tr class="text-center align-middle">
             <th (click)="doSetOrder('id')"><i [ngClass]="oIconService.getIcon('id')"></i> ID
@@ -70,21 +70,9 @@
   
             </th>
             <th (click)="doSetOrder('summonername')">
-              <i [ngClass]="oIconService.getIcon('nombre')"></i> SUMMONERNAME
+              <i [ngClass]="oIconService.getIcon('nombre')"></i> Invocador
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='summonername'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='summonername'&&currentSortDirection=='desc'"></i>
-  
-            </th>
-            <th (click)="doSetOrder('Rank')">
-              <i [ngClass]="oIconService.getIcon('nombre')"></i> RANK
-              <i class="fas fa-arrow-up" *ngIf="currentSortField=='Rank'&&currentSortDirection=='asc'"></i>
-              <i class="fas fa-arrow-down" *ngIf="currentSortField=='Rank'&&currentSortDirection=='desc'"></i>
-  
-            </th>
-            <th (click)="doSetOrder('summonerlevel')">
-              <i [ngClass]="oIconService.getIcon('nombre')"></i> Nivel
-              <i class="fas fa-arrow-up" *ngIf="currentSortField=='summonerlevel'&&currentSortDirection=='asc'"></i>
-              <i class="fas fa-arrow-down" *ngIf="currentSortField=='summonerlevel'&&currentSortDirection=='desc'"></i>
   
             </th>
             <th (click)="doSetOrder('equipo')" *ngIf="mode">
@@ -118,17 +106,14 @@
           <tr *ngFor="let fila of aPosts" class="align-middle">
             <td class="text-end">{{fila.id}}</td>
             <td *ngIf="mode">{{fila.login| trim:13 }}</td>
-            <td *ngIf="mode">{{fila.summonername}}</td>
-            <td *ngIf="mode">{{fila.tier}} {{fila.rank}}</td>
-            <td *ngIf="mode">{{fila.summonerlevel}}</td>
-
+            <td *ngIf="mode">{{fila.summonername|trim:10}}</td>
 
             <td>
                 <button class="btn btn-light btn-sm" [routerLink]="['/usuario/plist/tipousuario/' + fila.equipo.id]">
                   <i [ngClass]="oIconService.getIcon('usuario')"></i> ({{fila.equipo.id}})
                   {{fila.equipo.nombre}}</button>
               </td>            
-              <td *ngIf="mode">{{fila.email|trim:16}}</td>
+              <td *ngIf="mode">{{fila.email|trim:14}}</td>
 
             <td *ngIf="mode">{{fila.accountid | trim:7}}</td>
 

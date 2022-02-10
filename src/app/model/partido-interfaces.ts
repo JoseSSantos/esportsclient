@@ -15,6 +15,11 @@ export interface IPartido2Send{
     equipo2:I2Send,
     fecha: IFecha
 }
+export interface IPartidoNew{
+    id:number,
+    equipo1:I2Send,
+    fecha: IFecha
+}
 export interface IPartidoPage {
     content: IPartido[];
     totalElements: number,

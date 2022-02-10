@@ -56,14 +56,14 @@ export class UsuarioRoutedNewComponent implements OnInit {
 
     this.oUsuarioSession = JSON.parse(localStorage.getItem("user"));
 
-    if (this.oActivatedRoute.snapshot.data.message) {
-      const strUsuarioSession: string =
-        this.oActivatedRoute.snapshot.data.message;
-      localStorage.setItem('user', JSON.stringify(strUsuarioSession));
-    } else {
-      localStorage.clear();
-      oRouter.navigate(['/home']);
-    }
+    // if (this.oActivatedRoute.snapshot.data.message) {
+    //   const strUsuarioSession: string =
+    //     this.oActivatedRoute.snapshot.data.message;
+    //   localStorage.setItem('user', JSON.stringify(strUsuarioSession));
+    // } else {
+    //   localStorage.clear();
+    //   oRouter.navigate(['/home']);
+    // }
   }
 
   ngOnInit(): void {
@@ -72,12 +72,11 @@ export class UsuarioRoutedNewComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(5)]],
       summonername: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required, Validators.minLength(5)]],
-      tusuario: ['', [Validators.required, Validators.maxLength(1)]],
+      tusuario: ['', [Validators.maxLength(1)]],
       descripcion:['',[Validators.required, Validators.minLength(20)]],
       twitter: ['', [ Validators.maxLength(20)]],
       discord: ['', [ Validators.maxLength(10)]],
       equipo: ['', [Validators.required]],
-
 
     });
   }
@@ -100,7 +99,7 @@ export class UsuarioRoutedNewComponent implements OnInit {
       console.log(oData1);
 
         this.oAPIService.getAPI2(oData1.id).subscribe((oData2:IApi2[])=>{
-          console.log(oData2[0].rank);
+
           this.usuario = {
             id: null,
             login: this.oForm.value.login,
@@ -110,15 +109,15 @@ export class UsuarioRoutedNewComponent implements OnInit {
             accountid:oData1.id,
             profileiconid:oData1.profileIconId,
             summonerlevel:oData1.summonerLevel,
-            rank:oData2[0].rank,
-            tier:oData2[0].tier,
-            wins:oData2[0].wins,
-            losses:oData2[0].losses,
+            rank:oData2[0]?.rank,
+            tier:oData2[0]?.tier,
+            wins:oData2[0]?.wins,
+            losses:oData2[0]?.losses,
             discord:this.oForm.value.discord,
             twitter:this.oForm.value.twitter,
             descripcion:this.oForm.value.descripcion,
             tipousuario:{
-              id:this.oForm.value.tusuario
+              id:this.oForm.value.tusuario || 3
             },
             equipo:{
               id:this.oForm.value.equipo

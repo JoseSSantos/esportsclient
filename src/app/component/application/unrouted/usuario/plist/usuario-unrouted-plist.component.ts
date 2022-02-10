@@ -78,7 +78,12 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
         this.totalPages = oPage.totalPages;
         this.barraPaginacion = this.oPaginationService.pagination(this.totalPages, this.page);
       })
-    } else {
+    }
+    else if(this.strFilter!=null){
+      this.getPageFiltered();
+
+    }
+     else {
       this.oPostService.getPage(this.pageSize, this.page, this.currentSortField, this.currentSortDirection, this.strFilter).subscribe((oPage: IUsuarioPage) => {
         if (this.strFilter) {
           this.strFilteredMessage = "Listado filtrado por " + this.strFilter;
@@ -108,15 +113,34 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
       console.log(oPage);
     })
   }
+
   jumpToPage = () => {
     if (this.oActivatedRoute.snapshot.params.id) {
       this.teamfilter();
+    }else if(this.strFilter!=null){
+      this.getPageFiltered();
     } else {
       this.getPage();
     }
     return false;
   }
 
+  getPageFiltered=()=>{
+
+    this.oPostService.getPageWOEquipo(this.pageSize, this.page, this.currentSortField, this.currentSortDirection, this.id, this.strFilter).subscribe((oPage: IUsuarioPage) => {
+      if (this.strFilter) {
+        this.strFilteredMessage = "Listado filtrado por " + this.strFilter;
+      } else {
+        this.strFilteredMessage = "Listado NO filtrado";
+      }
+      this.aPosts = oPage.content;
+      this.nTotalElements = oPage.totalElements;
+      this.totalPages = oPage.totalPages;
+      this.barraPaginacion = this.oPaginationService.pagination(this.totalPages, this.page);
+      console.log(oPage);
+    })
+
+  }
   onKeyUpFilter(event: KeyboardEvent): void {
     this.subjectFiltro$.next(void 0);
   }
@@ -124,9 +148,8 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
   doFilter = () => {
 
     if (this.oActivatedRoute.snapshot.params.id) {
-      this.teamfilter();
+      this.getPageFiltered();
       console.log("filtrado");
-
     } else {
       console.log("sin filtrado");
 

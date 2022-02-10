@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IPartido } from 'src/app/model/partido-interfaces';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IPartido, IPartido2Send } from 'src/app/model/partido-interfaces';
 import { IUsuario } from 'src/app/model/usuario-interfaces';
 import { PartidoService } from 'src/app/service/partido.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-encuentro-unrouted-view',
@@ -15,18 +17,21 @@ export class EncuentroUnroutedViewComponent implements OnInit {
   @Input() id: number = null;  
   
   oPartido: IPartido;
+  oPartido2Send:IPartido2Send;
   oUsuarioSession: IUsuario;
 
   strEntity: string = "Partido"
   strOperation: string = "view"
   strTitleSingular:string= "Partido"
   strTitlePlural: string = 'Partidos'
+  strResult:string=""
 
   constructor(
     private oUsuarioService: UsuarioService,
     private activatedroute: ActivatedRoute,
     private oPartidoService:PartidoService,
-    private oActivatedRoute: ActivatedRoute
+    private oActivatedRoute: ActivatedRoute,
+    private oRouter:Router
     //public oIconService: IconService
   ) {
 
@@ -43,4 +48,46 @@ export class EncuentroUnroutedViewComponent implements OnInit {
         this.oPartido = oData;
       });
   };
+  onclick(){
+    this.update()
+
+  }
+  update = (): void => {
+    console.log(this.oPartido);
+
+    console.log(this.oUsuarioSession.equipo.id)
+    this.oPartido2Send ={
+      id:this.oPartido.id,
+      equipo1:{
+        id:      this.oPartido.equipo1.id
+      },
+      equipo2:{
+        id: this.oUsuarioSession.equipo.id
+      },
+      fecha:this.oPartido.fecha
+    }
+     this.oPartido2Send.equipo2.id=this.oUsuarioSession.equipo.id;
+    console.log(this.oPartido2Send)
+    
+    this.oPartidoService
+      .updateOne(this.oPartido2Send)
+      .subscribe((id: number) => {
+        if (id) {
+          this.strResult = 'El encuentro se ha modificado correctamente';
+        } else {
+          this.strResult = 'Error en la modificación del encuentro';
+        }
+        this.openPopup();
+      });
+  };
+
+  eventsSubjectShowPopup: Subject<void> = new Subject<void>();
+
+  openPopup(): void {
+    this.eventsSubjectShowPopup.next();
+  }
+
+  onClosePopup(): void {
+    this.oRouter.navigate([this.strEntity + '/view/' + this.id]);
+  }
 }

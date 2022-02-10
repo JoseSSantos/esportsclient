@@ -10,7 +10,7 @@ import {
   environment,
   httpOptions,
 } from 'src/environments/environment';
-import { IPartido, IPartido2Send, IPartidoPage } from '../model/partido-interfaces';
+import { IPartido, IPartido2Send, IPartidoNew, IPartidoPage } from '../model/partido-interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +31,9 @@ export class PartidoService {
   }
 
   newOne(oEquipo: IPartido2Send): Observable<number> {
+    return this.http.post<number>(this.sURL + "/new", oEquipo, httpOptions);
+  }
+  newOneA(oEquipo: IPartidoNew){
     return this.http.post<number>(this.sURL + "/new", oEquipo, httpOptions);
   }
 

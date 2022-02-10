@@ -27,10 +27,13 @@
           <p>Lvl: {{oUsuario?.summonerlevel}}</p>
         </div>
         <div class="Media">
-          <p>
+          <p *ngIf="oUsuario?.wins!=null">
           Victorias: {{oUsuario?.wins}}
           Derrotas: {{oUsuario?.losses}}
           WinRate: {{winRate | number:'.1-2'}}%
+        </p>
+        <p *ngIf="oUsuario?.wins==null">
+          Unranked
         </p>
         </div>
         <div class="redes">

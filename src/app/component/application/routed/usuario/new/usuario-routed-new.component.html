@@ -92,10 +92,12 @@
             <div class="row mb-3">
               <div class="col-sm-10">
                 <div class="input-group">
-                  <span class="input-group-text">{{dataToShow?.nombre}}</span>
-                  <input type="number" class="form-control" id="tusuario" formControlName="tusuario"
+                  <span class="input-group-text" *ngIf="oUsuarioSession!=null">{{dataToShow?.nombre}}</span>
+                  <span class="input-group-text" *ngIf="oUsuarioSession==null">Jugador</span>
+                  <input *ngIf="oUsuarioSession?.tipousuario.id==1" type="number" value="3" class="form-control" id="tusuario" formControlName="tusuario"
                     (ngModelChange)="onChangeTUsuario($event)">
-                  <button type="button" class="btn btn-success" (click)="openModal()">Buscar tipo usuario</button>
+                    <input type="number" *ngIf="oUsuarioSession==null" value="3" class="form-control" id="tusuario" formControlName="tusuario" readonly>
+                  <button type="button" *ngIf="oUsuarioSession?.tipousuario.id==1"class="btn btn-success" (click)="openModal()">Buscar tipo usuario</button>
                 </div>
               </div>
             </div>
@@ -178,5 +180,6 @@
     <header></header>
   </app-tipousuario-unrouted-plist>
 </app-modal>
+
 
 <app-popup [show]="eventsSubjectShowPopup.asObservable()" [body]="strResult" (close)="onClosePopup()"></app-popup>
