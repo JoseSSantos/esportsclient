@@ -56,50 +56,50 @@
   <div class="row justify-content-center">
     <div class="col-md table-responsive-md">
   
-      <table id="usuarios" class="table table-bordered table-striped table-hover">
+      <table id="usuarios" class="table table-bordered">
         <thead>
           <tr class="text-center align-middle">
-            <th (click)="doSetOrder('id')"><i [ngClass]="oIconService.getIcon('id')"></i> ID
+            <th (click)="doSetOrder('id')"> ID
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='id'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='id'&&currentSortDirection=='desc'"></i>
             </th>
             <th (click)="doSetOrder('login')">
-              <i [ngClass]="oIconService.getIcon('dni')"></i> LOGIN
+               LOGIN
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='login'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='login'&&currentSortDirection=='desc'"></i>
   
             </th>
             <th (click)="doSetOrder('summonername')">
-              <i [ngClass]="oIconService.getIcon('nombre')"></i> Invocador
+               Invocador
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='summonername'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='summonername'&&currentSortDirection=='desc'"></i>
   
             </th>
             <th (click)="doSetOrder('equipo')" *ngIf="mode">
-              <i [ngClass]="oIconService.getIcon('email')"></i> Equipo
+               Equipo
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='equipo'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='equipo'&&currentSortDirection=='desc'"></i>
   
             </th>
-            <th (click)="doSetOrder('email')"><i [ngClass]="oIconService.getIcon('carrito')"></i>
+            <th (click)="doSetOrder('email')">
               Email
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='email'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='email'&&currentSortDirection=='desc'"></i>
   
             </th>
-            <th (click)="doSetOrder('accountid')"><i [ngClass]="oIconService.getIcon('accountid')"></i>
+            <th (click)="doSetOrder('accountid')">
                 AccountId
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='accountid'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='accountid'&&currentSortDirection=='desc'"></i>
   
             </th>
-            <th (click)="doSetOrder('tipousuario')"><i [ngClass]="oIconService.getIcon('tipousuario')"></i>
+            <th (click)="doSetOrder('tipousuario')">
               Tipo de Usuario
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='tipousuario'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='tipousuario'&&currentSortDirection=='desc'"></i>
   
             </th>
-            <th><i [ngClass]="oIconService.getIcon('acciones')"></i> Acciones</th>
+            <th *ngIf="oUsuarioSession?.tipousuario.id==1"><i [ngClass]="oIconService.getIcon('acciones')"></i> Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -109,8 +109,8 @@
             <td *ngIf="mode">{{fila.summonername|trim:10}}</td>
 
             <td>
-                <button class="btn btn-light btn-sm" [routerLink]="['/usuario/plist/tipousuario/' + fila.equipo.id]">
-                  <i [ngClass]="oIconService.getIcon('usuario')"></i> ({{fila.equipo.id}})
+                <button class="btn btn-light btn-sm" [routerLink]="['/equipo/view/' + fila.equipo.id]">
+                   ({{fila.equipo.id}})
                   {{fila.equipo.nombre}}</button>
               </td>            
               <td *ngIf="mode">{{fila.email|trim:14}}</td>
@@ -119,12 +119,10 @@
 
   
             <td>
-              <button class="btn btn-light btn-sm" [routerLink]="['/usuario/plist/tipousuario/' + fila.tipousuario.id]">
-                <i [ngClass]="oIconService.getIcon('usuario')"></i> ({{fila.tipousuario.id}})
-                {{fila.tipousuario.nombre}}</button>
+                {{fila.tipousuario.nombre}}
             </td>
   
-            <td class="text-center">
+            <td class="text-center" *ngIf="oUsuarioSession?.tipousuario.id==1">
               <div class="btn-group btn-group-sm" role="group" *ngIf="!mode">
                 <button type="button" class="btn btn-success" (click)="onSelection(fila.id)"><i
                     class="fas fa-eye"></i></button>

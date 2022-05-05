@@ -43,8 +43,8 @@ export class EquipoService {
     return this.http.get<IEquipo>(this.sURL + "/" + id, httpOptions);
   }
 
-  newOne(oEquipo: IEquipo): Observable<number> {
-    return this.http.post<number>(this.sURL + "/new", oEquipo, httpOptions);
+  newOne(oEquipo: IEquipo): Observable<IEquipo> {
+    return this.http.post<IEquipo>(this.sURL + "/new", oEquipo, httpOptions);
   }
 
   updateOne(oEquipo: IEquipo): Observable<number> {

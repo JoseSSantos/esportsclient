@@ -8,6 +8,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import { IEquipo, IEquipoPage } from 'src/app/model/equipo-interfaces';
 import { PartidoService } from 'src/app/service/partido.service';
 import { IPartido, IPartidoPage } from 'src/app/model/partido-interfaces';
+import { IUsuario } from 'src/app/model/usuario-interfaces';
 
 @Component({
   selector: 'app-encuentro-unrouted-plist',
@@ -37,7 +38,7 @@ export class EncuentroUnroutedPlistComponent implements OnInit {
   strFilter: string = "";
   currentSortField: string = "";
   currentSortDirection: string = "";
-
+  oUsuarioSession:IUsuario;
   strFilteredMessage: string = "";
   subjectFiltro$ = new Subject();
 
@@ -48,11 +49,14 @@ export class EncuentroUnroutedPlistComponent implements OnInit {
     private oPartidoService: PartidoService,
     public oIconService: IconService,
     private oActivatedRoute: ActivatedRoute,
-  ) { }
+  ) { 
+
+    this.oUsuarioSession = JSON.parse(localStorage.getItem("user"));
+
+  }
 
   ngOnInit(): void {
     this.subjectFiltro$.pipe(
-      debounceTime(1000)
     ).subscribe(() => this.getPage());
     this.page = 1;
     this.getPage();
@@ -130,6 +134,9 @@ export class EncuentroUnroutedPlistComponent implements OnInit {
   onSelection2(id: number) {
     console.log("selection plist emite " + id);
     this.selection.emit(id);
+  }
+  onKeyUpFilter(event: KeyboardEvent): void {
+    this.subjectFiltro$.next(void 0);
   }
 
 }

@@ -20,7 +20,7 @@ export class EncuentroUnroutedViewComponent implements OnInit {
   oPartido2Send:IPartido2Send;
   oUsuarioSession: IUsuario;
 
-  strEntity: string = "Partido"
+  strEntity: string = "encuentro"
   strOperation: string = "view"
   strTitleSingular:string= "Partido"
   strTitlePlural: string = 'Partidos'
@@ -48,10 +48,12 @@ export class EncuentroUnroutedViewComponent implements OnInit {
         this.oPartido = oData;
       });
   };
+
   onclick(){
     this.update()
 
   }
+
   update = (): void => {
     console.log(this.oPartido);
 
@@ -88,6 +90,8 @@ export class EncuentroUnroutedViewComponent implements OnInit {
   }
 
   onClosePopup(): void {
+    window.location.reload();
+
     this.oRouter.navigate([this.strEntity + '/view/' + this.id]);
   }
 }

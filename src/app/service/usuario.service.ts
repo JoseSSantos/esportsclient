@@ -64,11 +64,14 @@ export class UsuarioService {
     return this.http.get<IUsuario>(this.sURL + "/" + id, httpOptions);
   }
 
-  newOne(oUsuario: IUsuario2Send): Observable<number> {
-    return this.http.post<number>(this.sURL + "/new", oUsuario, httpOptions);
+  newOne(oUsuario: IUsuario2Send): Observable<IUsuario> {
+    return this.http.post<IUsuario>(this.sURL + "/new", oUsuario, httpOptions);
   }
 
   updateOne(oUsuario: IUsuario2Send): Observable<number> {
+    return this.http.put<number>(this.sURL + "/" + oUsuario.id, oUsuario, httpOptions);
+  }
+  updateRange(oUsuario: IUsuario): Observable<number> {
     return this.http.put<number>(this.sURL + "/" + oUsuario.id, oUsuario, httpOptions);
   }
 

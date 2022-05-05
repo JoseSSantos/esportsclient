@@ -54,11 +54,14 @@ export class EquipoRoutedEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.oForm = this.oFormBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(5)]],
       descripcion: ['', [Validators.required, Validators.minLength(30)]],
       siglas: ['', [Validators.required, Validators.maxLength(5)]],
     });
+
+    console.log(this.oForm.value)
   }
 
   getOne = (): void => {
@@ -73,6 +76,9 @@ export class EquipoRoutedEditComponent implements OnInit {
           descripcion: ['', [Validators.required, Validators.minLength(30)]],
           siglas: ['', [Validators.required, Validators.maxLength(5)]],
         });
+        this.oForm.setValue({id:this.oEquipo.id,nombre:this.oEquipo.nombre,descripcion:this.oEquipo.descripcion, siglas:this.oEquipo.siglas})
+
+        console.log(this.oForm.value)
       });
   };
 

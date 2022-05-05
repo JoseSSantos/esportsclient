@@ -35,6 +35,7 @@ export class EquipoRoutedViewComponent implements OnInit {
     }
 
     this.id = this.oActivatedRoute.snapshot.params.id;
+    //this.id = this.oActivatedRoute.snapshot.params.get('id'); Para probar
   }
 
   ngOnInit(): void {

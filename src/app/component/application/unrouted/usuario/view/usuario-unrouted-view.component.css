@@ -36,3 +36,24 @@ float:left
     margin-right: 5%;
     margin-bottom: 5%;
 }
+
+.ajustes{
+    float: right;
+    margin: 5%;
+    width:10%;
+}
+
+.ajustes img{
+    float: right;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 3rem;
+}
+.ajustes img:hover{
+    cursor: pointer;
+}
+@media only screen and (max-width: 1400px){
+    .ajustes{margin-top: 5%;}
+
+
+}

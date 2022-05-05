@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { IUsuarioPage } from 'src/app/model/usuario-interfaces';
 
 @Component({
-  selector: 'app-infinite-routed-list',
-  templateUrl: './infinite-routed-list.component.html',
-  styleUrls: ['./infinite-routed-list.component.css']
+  selector: 'app-usuario-infinite-list',
+  templateUrl: './usuario-infinite-list.component.html',
+  styleUrls: ['./usuario-infinite-list.component.css']
 })
-export class InfiniteRoutedListComponent implements OnInit {
+export class UsuarioInfiniteListComponent implements OnInit {
 
-   linesToWrite: Array<string>;
+  linesToWrite: IUsuarioPage[];
   private finishPage = 5;
   private actualPage: number;
  
@@ -16,7 +17,7 @@ export class InfiniteRoutedListComponent implements OnInit {
    }
  
   ngOnInit() {
-    this.linesToWrite = new Array<string>();
+    this.linesToWrite;
     this.add40lines();
   }
  
@@ -24,7 +25,9 @@ export class InfiniteRoutedListComponent implements OnInit {
     const line = 'Another new line -- ';
     let lineCounter = this.linesToWrite.length;
     for (let i = 0; i < 40; i ++) {
-      this.linesToWrite.push(line + lineCounter);
+      this.linesToWrite.push(
+        
+      );
       lineCounter ++;
     }
   }

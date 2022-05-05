@@ -1,0 +1,14 @@
+<app-menu></app-menu>
+
+<h1>Equipos</h1>
+
+<div class="container" infiniteScroll  (scrolled)="onScroll()">
+  <div class="row justify-content-center">
+    <div class="card" routerLink="/equipo/view/{{equipo.id}}" *ngFor="let equipo of equipos;" style="background-image: url(https://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/4005.png);">
+
+      <h3 class="title" style="text-align: center;"> {{equipo.nombre | trim:12}}</h3>
+    </div>
+
+    </div>
+</div>
+<app-footer></app-footer>

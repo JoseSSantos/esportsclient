@@ -90,7 +90,7 @@ export class UsuarioRoutedEditComponent implements OnInit {
           login: ['', [Validators.required, Validators.minLength(5)]],
           password: ['', [Validators.required, Validators.minLength(5)]],
           summonername: ['', [Validators.required, Validators.minLength(5)]],
-
+          descripcion:['', Validators.required, Validators.minLength(10)],
           email: ['', [Validators.required, Validators.minLength(5)]],
           tusuario: ['', [Validators.required, Validators.maxLength(1)]],
 
@@ -98,6 +98,12 @@ export class UsuarioRoutedEditComponent implements OnInit {
           discord: ['', [ Validators.maxLength(10)]],
           equipo: ['', [Validators.required, Validators.maxLength(1)]],
         });
+        this.oForm.setValue({id:this.oUsuario2Show.id,login:this.oUsuario2Show.login,
+          password:null, summonername:this.oUsuario2Show.summonername, email:this.oUsuario2Show.email,
+          descripcion:this.oUsuario2Show.descripcion,
+           tusuario:this.oUsuario2Show.tipousuario.id, twitter:this.oUsuario2Show.twitter, 
+           discord:this.oUsuario2Show.discord, equipo:this.oUsuario2Show.equipo.id})
+
       });
   };
 

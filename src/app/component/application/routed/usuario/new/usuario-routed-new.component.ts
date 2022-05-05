@@ -133,9 +133,11 @@ export class UsuarioRoutedNewComponent implements OnInit {
   new = (): void => {
     this.oUsuarioService
       .newOne(this.usuario)
-      .subscribe((id: number) => {
-        if (id) {
-          this.id = id;
+      .subscribe((usuarionew: IUsuario) => {
+        if (usuarionew) {
+          console.log(usuarionew);
+          this.id = usuarionew.id;
+          console.log(this.id);
           this.strResult = 'El usuario se ha creado correctamente';
         } else {
           this.strResult = 'Error en la creación del registro';
@@ -227,6 +229,6 @@ export class UsuarioRoutedNewComponent implements OnInit {
   }
 
   onClosePopup(): void {
-    this.oRouter.navigate([this.strEntity + '/view/' + this.usuario.id]);
+    this.oRouter.navigate([this.strEntity + '/view/' + this.id]);
   }
 }

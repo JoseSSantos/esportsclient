@@ -49,26 +49,7 @@
     </div>
 
   </div>
-    <!-- <table class="table table-striped">
-      <tbody>
-        <tr *ngIf="oUsuarioSession?.tipousuario?.id==1">
-          <th>ID</th>
-          <td>{{oPartido?.id}}</td>
-        </tr>
-        <tr>
-        <tr>
-          <td>Equipo1</td>
-          <td>{{oPartido?.equipo1.nombre}}</td>
-        </tr>
-        <tr>
-          <td>Equipo2</td>
-          <td>{{oPartido?.equipo2.nombre}}</td>
-        </tr>
-        <tr>
-          <td>Fecha</td>
-          <td>{{oPartido?.fecha}}</td>
-        </tr>
 
-      </tbody>
-    </table> -->
   </div>
+
+  <app-popup [show]="eventsSubjectShowPopup.asObservable()" [body]="strResult" (close)="onClosePopup()"></app-popup>

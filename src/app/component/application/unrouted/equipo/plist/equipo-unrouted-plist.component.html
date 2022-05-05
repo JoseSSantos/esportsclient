@@ -56,33 +56,33 @@
   <div class="row justify-content-center">
     <div class="col-md table-responsive-md">
   
-      <table class="table table-bordered table-striped table-hover">
+      <table class="table table-bordered table-hover">
         <thead>
           <tr class="text-center align-middle">
-            <th (click)="doSetOrder('id')"><i [ngClass]="oIconService.getIcon('id')"></i> ID
+            <th (click)="doSetOrder('id')"> ID
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='id'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='id'&&currentSortDirection=='desc'"></i>
             </th>
             <th (click)="doSetOrder('nombre')">
-              <i [ngClass]="oIconService.getIcon('dni')"></i> nombre
+               nombre
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='nombre'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='nombre'&&currentSortDirection=='desc'"></i>
   
             </th>
             <th (click)="doSetOrder('descripcion')">
-              <i [ngClass]="oIconService.getIcon('nombre')"></i> descripcion
+               descripcion
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='descripcion'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='descripcion'&&currentSortDirection=='desc'"></i>
   
             </th>
             <th (click)="doSetOrder('siglas')">
-              <i [ngClass]="oIconService.getIcon('nombre')"></i> siglas
+               siglas
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='siglas'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='siglas'&&currentSortDirection=='desc'"></i>
   
             </th>
             
-            <th><i [ngClass]="oIconService.getIcon('acciones')"></i> Acciones</th>
+            <th> Acciones</th>
           </tr>
         </thead>
         <tbody>

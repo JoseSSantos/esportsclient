@@ -88,6 +88,8 @@ export class EncuentroRoutedEditComponent implements OnInit {
           equipo2: ['', [Validators.required]],
           fecha: ['', [Validators.required]],
         });
+        this.oForm.setValue({id:this.oPartido.id, equipo1:this.oPartido.equipo1.id, 
+          equipo2:this.oPartido.equipo2.id, fecha:this.oPartido.fecha})
       });
   };
 

@@ -5,42 +5,8 @@
     <app-header [title]="'Borrado de ' + strTitleSingular">
   </app-header>
     <div class="row justify-content-center">
-        <table class="table table-striped">
-            <tbody>
-                <tr>
-                    <th>ID</th>
-                    <td>{{oUsuario?.id}}</td>
-                </tr>
-                <tr>
-                    <th>Login</th>
-                    <td>@{{oUsuario?.login}}</td>
-                </tr>
-                <tr>
-                    <th>Nombre de Invocador</th>
-                    <td>{{oUsuario?.summonername}}</td>
-                </tr>
-                <tr>
-                    <th>Nivel de Invocador</th>
-                    <td>{{oUsuario?.summonerlevel}}</td>
-                </tr>
-                <tr>
-                    <th>email</th>
-                    <td>{{oUsuario?.email}}</td>
-                </tr>
-                <tr>
-                    <th>Tipo Usuario</th>
-                    <td>{{oUsuario?.tipousuario.id}}</td>
-                </tr>
-                <tr>
-                    <th>Rango</th>
-                    <td>{{oUsuario?.rank}} {{oUsuario?.tier}}</td>
-                </tr>
-                <tr>
-                    <th>Equipo</th>
-                    <td>{{oUsuario?.equipo.nombre}} </td>
-                </tr>
-            </tbody>
-        </table>
+        <app-usuario-unrouted-view [id]=id></app-usuario-unrouted-view>
+
     </div>
     <div class="row justify-content-center">
         <div class="col-md-5 control-group text-center my-3">

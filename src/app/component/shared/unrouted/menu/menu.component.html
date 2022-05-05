@@ -44,7 +44,38 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!oUsuarioSession">
 
             </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="oUsuarioSession?.tipousuario?.id==3">
+
+                <li class="nav-item">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/infinite'"
+                            [routerLink]="['/infinite']"> Jugadores</a>
+                    </small>
+                </li>
+
+                <li class="nav-item">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/equipos'"
+                            [routerLink]="['/equipos']"> Equipos</a>
+                    </small>
+                </li>
+
+            </ul>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="oUsuarioSession?.tipousuario?.id==2">
+
+                <li class="nav-item">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/infinite'"
+                            [routerLink]="['/infinite']"> Jugadores</a>
+                    </small>
+                </li>
+
+                <li class="nav-item">
+                    <small>
+                        <a class="nav-link" [class.active]="strUrl=='/equipos'"
+                            [routerLink]="['/equipos']"> Equipos</a>
+                    </small>
+                </li>
 
                 <li class="nav-item">
                     <small>

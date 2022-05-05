@@ -1,9 +1,16 @@
+import { UsuarioService } from './service/usuario.service';
+import { TipousuarioService } from './service/tipousuario.service';
+import { PartidoService } from './service/partido.service';
+import { PaginationService } from './service/pagination.service';
+import { IconService } from './service/icon.service';
+import { EquipoService } from './service/equipo.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/shared/routed/login/login.component';
 import { SessionService } from './service/session.service';
+import { CryptoService } from './service/crypto.service';
 import { SessionResolver } from './resolve/session.resolve';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,9 +47,11 @@ import { EncuentroUnroutedPlistComponent } from './component/application/unroute
 import { EncuentroRoutedEditComponent } from './component/application/routed/encuentro/edit/encuentro-routed-edit.component';
 import { EncuentroRoutedRemoveComponent } from './component/application/routed/encuentro/remove/encuentro-routed-remove.component';
 import { DiscordComponent } from './component/shared/unrouted/discord/discord.component';
-import { InfiniteRoutedListComponent } from './component/application/routed/encuentro/infinite-routed-list/infinite-routed-list.component';
-//import { UsuarioCplistUnroutedComponent } from './component/application/unrouted/usuario/cplist/usuario-cplist-unrouted.component';
+import { InfiniteRoutedListComponent } from './component/application/routed/usuario/infinite/infinite-routed-list.component';
+import { UsuarioCplistUnroutedComponent } from './component/application/unrouted/usuario/cplist/usuario-cplist-unrouted.component';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { UsuarioInfiniteListComponent } from './component/application/routed/usuario/usuario-infinite-list/usuario-infinite-list.component';
+import { EquipoNormalViewComponent } from './component/application/routed/equipo/normal-view/equipo-normal-view.component';
 
 
 @NgModule({
@@ -82,7 +91,9 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     EncuentroRoutedRemoveComponent,
     DiscordComponent,
     InfiniteRoutedListComponent,
-    //UsuarioCplistUnroutedComponent
+    UsuarioInfiniteListComponent,
+    UsuarioCplistUnroutedComponent,
+    EquipoNormalViewComponent
     
   ],
   imports: [
@@ -97,7 +108,15 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
     SessionService,
     SessionResolver,
     APIService,
-    DateTimeService
+    DateTimeService,
+    CryptoService,
+    EquipoService,
+    IconService,
+    PaginationService,
+    PartidoService,
+    TipousuarioService,
+    UsuarioService
+
   ],
   bootstrap: [AppComponent]
 })

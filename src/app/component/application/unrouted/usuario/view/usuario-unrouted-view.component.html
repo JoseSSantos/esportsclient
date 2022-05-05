@@ -11,7 +11,7 @@
   <div class="perfil">
     <div class="principal">
       <div class="imagenperfil">
-        <img src="https://ddragon.leagueoflegends.com/cdn/11.14.1/img/profileicon/{{oUsuario?.profileiconid}}.png">
+        <img src="https://ddragon.leagueoflegends.com/cdn/12.4.1/img/profileicon/{{oUsuario?.profileiconid}}.png">
       </div>
       <div class="datos">
         <div class="login">
@@ -20,7 +20,7 @@
         <div class="summonername">
           <p>{{oUsuario?.summonername}}</p>
         </div>
-        <div class="Rango">
+        <div class="Rango" *ngIf="oUsuario?.tier!=null">
           <p>{{oUsuario?.tier}} {{oUsuario?.rank}}</p>
         </div>
         <div class="Nivel">
@@ -42,6 +42,12 @@
           Twitter: {{oUsuario?.twitter}}
         </p>
         </div>
+      </div>
+      <div class="ajustes" *ngIf="oUsuarioSession?.id==this.id">
+        
+        <img src="../../../../../../assets/img/settings.png" routerLink="/usuario/edit/{{this.id}}">
+
+        <img src="../../../../../../assets/img/reload.png" (click)="reload()">
       </div>
     </div>
 

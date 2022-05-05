@@ -20,7 +20,9 @@ import { EncuentroRoutedViewComponent } from './component/application/routed/enc
 import { EncuentroRoutedPlistComponent } from './component/application/routed/encuentro/plist/encuentro-routed-plist.component';
 import { EncuentroRoutedEditComponent } from './component/application/routed/encuentro/edit/encuentro-routed-edit.component';
 import { EncuentroRoutedRemoveComponent } from './component/application/routed/encuentro/remove/encuentro-routed-remove.component';
-
+import { UsuarioInfiniteListComponent } from './component/application/routed/usuario/usuario-infinite-list/usuario-infinite-list.component';
+import { InfiniteRoutedListComponent } from './component/application/routed/usuario/infinite/infinite-routed-list.component';
+import { EquipoNormalViewComponent } from './component/application/routed/equipo/normal-view/equipo-normal-view.component';
 
 const routes: Routes = [
 
@@ -34,12 +36,14 @@ const routes: Routes = [
   { path: 'usuario/new', component: UsuarioRoutedNewComponent, resolve: {message:SessionResolver}},
   { path: 'usuario/remove/:id', component: UsuarioRemoveRoutedComponent, resolve:{message:SessionResolver}},
   { path: 'usuario/edit/:id', component:UsuarioRoutedEditComponent, resolve:{message:SessionResolver}},
+  { path: 'infinite', component:InfiniteRoutedListComponent, resolve:{message:SessionResolver}},
 
   { path: 'equipo/view/:id', component: EquipoRoutedViewComponent, resolve: {message:SessionResolver}},
   { path: 'equipo/edit/:id', component: EquipoRoutedEditComponent, resolve: {message:SessionResolver}},
   { path: 'equipo/remove/:id', component: EquipoRoutedRemoveComponent, resolve: {message:SessionResolver}},
   { path: 'equipo/plist', component:EquipoRoutedPlistComponent, resolve:{message:SessionResolver}},
   { path: 'equipo/new', component:EquipoRoutedNewComponent, resolve:{message:SessionResolver}},
+  { path: 'equipos', component:EquipoNormalViewComponent, resolve:{message:SessionResolver}},
   
   { path: 'encuentro/new', component:EncuentroRoutedNewComponent, resolve:{message:SessionResolver}},
   { path: 'encuentro/view/:id', component:EncuentroRoutedViewComponent, resolve:{message:SessionResolver}},

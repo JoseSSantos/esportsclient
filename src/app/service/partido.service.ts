@@ -30,11 +30,11 @@ export class PartidoService {
     return this.http.get<IPartido>(this.sURL + "/" + id, httpOptions);
   }
 
-  newOne(oEquipo: IPartido2Send): Observable<number> {
-    return this.http.post<number>(this.sURL + "/new", oEquipo, httpOptions);
+  newOne(oEquipo: IPartido2Send): Observable<IPartido> {
+    return this.http.post<IPartido>(this.sURL + "/new", oEquipo, httpOptions);
   }
-  newOneA(oEquipo: IPartidoNew){
-    return this.http.post<number>(this.sURL + "/new", oEquipo, httpOptions);
+  newOneA(oEquipo: IPartidoNew):Observable<IPartido> {
+    return this.http.post<IPartido>(this.sURL + "/new", oEquipo, httpOptions);
   }
 
   updateOne(oEquipo: IPartido2Send): Observable<number> {

@@ -17,11 +17,11 @@ export class APIService {
   }
 
   getAPI1(summonername:string):Observable<IApi1>{
-    return this.http.get<IApi1>('https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+summonername+'?api_key=RGAPI-4a280ee0-3de7-4d92-becc-aab716350781',httpOptions2);
+    return this.http.get<IApi1>('https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/'+summonername+'?api_key=RGAPI-4d02055d-9179-458a-99fb-22ca9ba57aa4',httpOptions2);
   }
 
   getAPI2(accountid:string):Observable<IApi2[]>{
-    return this.http.get<IApi2[]>('https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/'+accountid+'?api_key=RGAPI-4a280ee0-3de7-4d92-becc-aab716350781',httpOptions2);
+    return this.http.get<IApi2[]>('https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/'+accountid+'?api_key=RGAPI-4d02055d-9179-458a-99fb-22ca9ba57aa4',httpOptions2);
   }
 
 }

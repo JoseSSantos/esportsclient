@@ -5,10 +5,9 @@
     <div class="row justify-content-center">
 
         <div class="col-md-5 text-center">
-            <div class="bg-light mt-5 p-5">
-                <img class="my-3" src="assets/img/wildCartLogo100.png" width="100">
+            <div class="bg-dark mt-5 p-5">
                 <form [formGroup]="formularioLogin" (ngSubmit)="onSubmit()" novalidate class="row g-3">
-                    <h4>entrada al sistema</h4>
+                    <h4>EMATCH</h4>
                     <div class="col-12 text-start">
                         <label for="username" class="form-label">Nombre de usuario</label>
                         <div class="input-group has-validation">
@@ -45,7 +44,6 @@
                     <div class="col-12">
                         <div class="control-group text-center mt-3">
                             <button class="btn btn-danger m-2" (click)="loginAdmin()"> admin/admin</button>
-                            <button class="btn btn-success m-2" (click)="loginUser()"> user/wildcart</button>
                         </div>
                     </div>
                 </form>

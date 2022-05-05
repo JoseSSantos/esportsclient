@@ -23,7 +23,7 @@
         <div class="col-sm-10">
           <div class="row mb-3">
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="nombre" formControlName="nombre" value="{{oEquipo?.nombre}}"
+              <input type="text" class="form-control" id="nombre" formControlName="nombre" 
                 [ngClass]="{'is-valid' : f.nombre.dirty && !(f.nombre.errors?.required || f.nombre.errors?.minlength) }">
               <div *ngIf="f.nombre.dirty && f.nombre.errors?.required" class="text-danger">
                 Se debe introducir un nombre
@@ -69,7 +69,7 @@
 
     <div class="row mb-3 justify-content-center">
         <div class="d-grid gap-2 d-md-block mt-3 d-md-flex justify-content-md-center">
-          <button type="submit" class="btn btn-warning" [disabled]="oForm.invalid || oForm.pristine"><i
+          <button type="submit" class="btn btn-warning" [disabled]="oForm.invalid"><i
               [ngClass]="oIconService.getIcon('ok')"></i> Modificar
             el {{strTitleSingular}}</button>
         </div>

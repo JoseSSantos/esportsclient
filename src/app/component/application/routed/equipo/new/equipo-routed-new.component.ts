@@ -76,9 +76,11 @@ export class EquipoRoutedNewComponent implements OnInit {
   new = (): void => {
     this.oEquipoService
       .newOne(this.oEquipo)
-      .subscribe((id:number) => {
-        if (id) {
-          console.log(id)
+      .subscribe((equipo:IEquipo) => {
+        if (equipo) {
+          console.log(equipo.id)
+          this.id=equipo.id;
+
           this.strResult = 'El Equipo se ha creado correctamente';
         } else {
           this.strResult = 'Error en la creacion del equipo';

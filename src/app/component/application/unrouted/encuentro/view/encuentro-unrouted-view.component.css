@@ -31,6 +31,7 @@
 
 
 .equipo1datos{
+    margin-left: 5%;
 height: 15%;
 width: 100%;
 float: right;
@@ -38,7 +39,6 @@ float: right;
 .equipo2datos{
     width: 100%;
     height: 15%;
-    margin-left: 5%;
 }
 .fecha {
     text-align: center;

@@ -155,7 +155,6 @@ export class UsuarioUnroutedPlistComponent implements OnInit {
 
       this.getPage();
     }
-
   }
 
   doResetFilter = () => {

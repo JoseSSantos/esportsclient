@@ -4,6 +4,9 @@ import { IUsuario } from 'src/app/model/usuario-interfaces';
 import { ActivatedRoute } from '@angular/router';
 import { EquipoService } from 'src/app/service/equipo.service';
 import { IEquipo } from 'src/app/model/equipo-interfaces';
+import { APIService } from 'src/app/service/api.service';
+import { IApi1, IApi2 } from 'src/app/model/API-interfaces';
+import { CryptoService } from 'src/app/service/crypto.service';
 
 @Component({
   selector: 'app-usuario-unrouted-view',
@@ -27,7 +30,9 @@ export class usuariounroutedViewComponent implements OnInit {
     private oUsuarioService: UsuarioService,
     private activatedroute: ActivatedRoute,
     private oEquipoService:EquipoService,
-    private oActivatedroute:ActivatedRoute
+    private oActivatedroute:ActivatedRoute,
+    private oApiService:APIService,
+    private oCryptoService:CryptoService
     //public oIconService: IconService
   ) {
 
@@ -53,5 +58,59 @@ export class usuariounroutedViewComponent implements OnInit {
     this.winRate=this.oUsuario.wins*100/(this.oUsuario.wins+this.oUsuario.losses);
     console.log(this.winRate);
   }
+
+  reload=()=>{
+    this.oApiService.getAPI1(this.oUsuario.summonername).subscribe((oData1:IApi1)=>{
+    this.oApiService.getAPI2(oData1.id).subscribe((oData2:IApi2[])=>{
+
+      this.oUsuario = {
+        id: this.oUsuario.id,
+        login: this.oUsuario.login,
+        email: this.oUsuario.email,
+        summonername:this.oUsuario.summonername,
+        accountid:this.oUsuario.accountid,
+        profileiconid:oData1.profileIconId,
+        summonerlevel:oData1.summonerLevel,
+        rank:oData2[0]?.rank,
+        tier:oData2[0]?.tier,
+        wins:oData2[0]?.wins,
+        losses:oData2[0]?.losses,
+        discord:this.oUsuario.discord,
+        twitter:this.oUsuario.twitter,
+        descripcion:this.oUsuario.descripcion,
+        tipousuario:{
+          id:this.oUsuario.tipousuario.id,
+          nombre:this.oUsuario.tipousuario.nombre
+        },
+        equipo:{
+          id:this.oUsuario.equipo.id,
+          nombre:this.oUsuario.equipo.nombre,
+          descripcion:this.oUsuario.equipo.descripcion,
+          siglas:this.oUsuario.equipo.siglas
+        }
+      };
+      this.update();
+
+
+
+    });
+  })
+
+  }
+
+  update = (): void => {
+    console.log(this.oUsuario);
+    this.oUsuarioService
+      .updateRange(this.oUsuario)
+      .subscribe((id: number) => {
+        this.getWinRate();
+        // if (id) {
+        //   this.strResult = 'El usuario se ha modificado correctamente';
+        // } else {
+        //   this.strResult = 'Error en la modificación del usuario';
+        // }
+        // this.openPopup();
+      });
+  };
 
 }

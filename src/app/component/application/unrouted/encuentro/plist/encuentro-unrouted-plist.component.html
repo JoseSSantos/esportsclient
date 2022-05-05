@@ -8,9 +8,9 @@
           <div class="input-group-prepend">
             <span class="input-group-text"> <i [ngClass]="oIconService.getIcon('filtro')"></i></span>
           </div>
-          <!-- <input type="text" class="form-control" placeholder="{{'Filtro de ' + strTitlePlural}}" placeholder="Search"
+          <input type="text" class="form-control" placeholder="{{'Filtro de ' + strTitlePlural}}" placeholder="Search"
             (keyup)="onKeyUpFilter($event)" [(ngModel)]="strFilter" name="buscar" aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm" /> -->
+            aria-describedby="inputGroup-sizing-sm" />
         </div>
       </form>
     </div>
@@ -56,33 +56,33 @@
   <div class="row justify-content-center">
     <div class="col-md table-responsive-md">
   
-      <table class="table table-bordered table-striped table-hover">
+      <table class="table table-bordered table-hover">
         <thead>
           <tr class="text-center align-middle">
-            <th (click)="doSetOrder('id')"><i [ngClass]="oIconService.getIcon('id')"></i> ID
+            <th (click)="doSetOrder('id')"> ID
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='id'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='id'&&currentSortDirection=='desc'"></i>
             </th>
             <th (click)="doSetOrder('equipo1')">
-              <i [ngClass]="oIconService.getIcon('dni')"></i> Equipo 1
+               Equipo 1
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='equipo1'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='equipo1'&&currentSortDirection=='desc'"></i>
   
             </th>
             <th (click)="doSetOrder('equipo2')">
-              <i [ngClass]="oIconService.getIcon('nombre')"></i> Equipo 2
+               Equipo 2
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='equipo2'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='equipo2'&&currentSortDirection=='desc'"></i>
   
             </th>
             <th (click)="doSetOrder('fecha')">
-              <i [ngClass]="oIconService.getIcon('date')"></i> fecha
+               fecha
               <i class="fas fa-arrow-up" *ngIf="currentSortField=='fecha'&&currentSortDirection=='asc'"></i>
               <i class="fas fa-arrow-down" *ngIf="currentSortField=='fecha'&&currentSortDirection=='desc'"></i>
   
             </th>
             
-            <th><i [ngClass]="oIconService.getIcon('acciones')"></i> Acciones</th>
+            <th ><i [ngClass]="oIconService.getIcon('acciones')"></i> Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -102,9 +102,9 @@
               <div class="btn-group btn-group-sm" role="group" *ngIf="mode">
                 <button type="button" class="btn btn-success" [routerLink]="['/encuentro/view/' + fila.id]"><i
                     class="fas fa-eye"></i></button>
-                <button type="button" class="btn btn-warning" [routerLink]="['/encuentro/edit/' + fila.id]"><i
+                <button *ngIf="oUsuarioSession?.tipousuario.id==1" type="button" class="btn btn-warning" [routerLink]="['/encuentro/edit/' + fila.id]"><i
                     class="fas fa-pen"></i></button>
-                <button type="button" class="btn btn-danger" [routerLink]="['/encuentro/remove/' + fila.id]"><i
+                <button *ngIf="oUsuarioSession?.tipousuario.id==1" type="button" class="btn btn-danger" [routerLink]="['/encuentro/remove/' + fila.id]"><i
                    class="fas fa-trash" ></i></button>
   
                 <!-- 

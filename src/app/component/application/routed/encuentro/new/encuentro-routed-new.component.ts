@@ -20,13 +20,13 @@ declare let $: any;
 })
 export class EncuentroRoutedNewComponent implements OnInit {
 
-  strEntity: string = 'partido';
+  strEntity: string = 'encuentro';
   strOperation: string = 'new';
   strTitleSingular: string = 'partido';
   strTitlePlural: string = 'equipos';
   oPartidoOrg: IPartidoNew=null;
   oPartidoAdm: IPartido2Send=null;
-  id: number = null;
+  id: number = 0;
   oForm: FormGroup = null;
   strResult: string = null;
   oUsuarioSession: IUsuario;
@@ -86,6 +86,8 @@ export class EncuentroRoutedNewComponent implements OnInit {
   }
 
 
+
+
   onSubmit(): void {
     if (this.oUsuarioSession.tipousuario.id==2 && this.oForm){
       this.oPartidoOrg = {
@@ -116,9 +118,12 @@ export class EncuentroRoutedNewComponent implements OnInit {
   newA = (): void => {
     this.oPartidoService
       .newOne(this.oPartidoAdm)
-      .subscribe((id:number) => {
-        if (id) {
-          console.log(id)
+      .subscribe((oPartido:IPartido) => {
+        if (oPartido) {
+          
+          this.id=oPartido.id;
+          console.log("newa")
+          console.log(this.id)
           this.strResult = 'El partido se ha creado correctamente';
         } else {
           this.strResult = 'Error en la creacion del partido';
@@ -129,9 +134,11 @@ export class EncuentroRoutedNewComponent implements OnInit {
   newO = (): void => {
     this.oPartidoService
       .newOneA(this.oPartidoOrg)
-      .subscribe((id:number) => {
-        if (id) {
-          console.log(id)
+      .subscribe((oPartido:IPartido) => {
+        if (oPartido) {
+          this.id=oPartido.id;
+          console.log("newo")
+          console.log(this.id)
           this.strResult = 'El partido se ha creado correctamente';
         } else {
           this.strResult = 'Error en la creacion del partido';
@@ -225,6 +232,7 @@ onSelection2($event: any) {
   }
 
   onClosePopup(): void {
+    console.log(this.id)
     this.oRouter.navigate([this.strEntity + '/view/' + this.id]);
   }
   
